@@ -1,11 +1,11 @@
 const express = require('express');
-const m1 = require('./m1.js');
+const regist = require('./regist.js');
 
 const router = express.Router();
 router.install = function(module){
     module.install(this);
 };
 
-router.install(m1);
+router.install(regist);
 
 module.exports = exports = router;

@@ -5,10 +5,7 @@ const keyCache = {};
 function getKeygen() {
     return new Promise((resolve, reject) => {
         if (keyCache.publicKey && keyCache.privateKey) {
-            console.log("from key cache");
-            resolve({
-                keyCache,
-            });
+            resolve(keyCache);
         } else {
             Key.findOne({
                 _id: "601d6bf05e45cd4e17c7c08a",

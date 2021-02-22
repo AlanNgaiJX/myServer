@@ -1,6 +1,4 @@
-const crypto = require('crypto');
-const Key = require('./model/Key.js');
-
+const crypto = require("crypto");
 const publicKey = `-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDYj4Wjz4RqrkW69iSyj8TBj+lu
 TXUpsb+pIp2mkmJOIIwH+G6QeP93eojSzfIpktUSHUiy9U6TukeQORd20PaClm0m
@@ -26,20 +24,12 @@ uK9BJrJLvWVy5dnheOi+43nZWI6MYrKhMWPJVYKAvPAtIebgy4CM+TI2nKF9MORm
 msJXIKm1Yoz256Y=
 -----END PRIVATE KEY-----`;
 
-const k = new Key({
-    publicKey: publicKey,
-    privateKey: privateKey
-});
+const encoded = `d679a476c6986cb8063baec5f9d46a52418d82e8ffb48a0a7c3487f58ca23b8e614142baa496116cfebcf19e9032caa69e65834e12ad14a1ef54f9f7ad5e1ba4bdb4a9091d408729d27447ec2d348a51838d68710c3ef7552b3260cd34abe69afb80b3de2970fac62cf51089407a4020be3dd336447b2c6e495d717e17d36764`;
+const text = "hello world";
+const result = crypto.publicEncrypt(publicKey, Buffer.from(text));
+const result1 = crypto.privateDecrypt(
+    privateKey,
+    Buffer.from(encoded, "hex")
+);
 
-k.save();
-
-// const text = 'hello world';
-
-// const result = crypto.publicEncrypt(publicKey, Buffer.from(text));
-
-// const result1 = crypto.privateDecrypt(privateKey, result);
-
-// console.log(result1.toString());
-
-
-
+console.log(result1.toString());
