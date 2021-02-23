@@ -1,5 +1,6 @@
 const express = require('express');
 const regist = require('./regist.js');
+const login = require('./login.js');
 
 const router = express.Router();
 router.install = function(module){
@@ -7,5 +8,6 @@ router.install = function(module){
 };
 
 router.install(regist);
+router.install(login);
 
 module.exports = exports = router;
