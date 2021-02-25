@@ -1,23 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const JWT = require("../utils/jwt.js");
-const { jwtAuth } = require("../utils/middlewares.js");
+const { jwtAuth, catchJwtAuth } = require("../utils/middlewares.js");
 
 router.get("/", function (req, res) {
     res.end("ok");
 });
 
-router.get("/a", jwtAuth, function (req, res) {
-    console.log(req.user);
-    res.end("ok");
+router.post("/jwtAuth", jwtAuth, catchJwtAuth, function (req, res) {
+    res.json(req.user);
 });
 
-router.post("/test", function (req, res) {
+router.post("/getToken", function (req, res) {
     const token = JWT.generate({
         _id: "123",
         role: "admin",
     });
     if (token) {
+        res.cookie("token", token, { maxAge: 900000 });
         res.json({
             status: "ok",
             code: 200,

@@ -61,6 +61,13 @@ const UserSchema = mongoose.Schema(
             required: true,
         },
 
+        userRole: {
+            type: Number,
+            enum: [1, 2], // [1：普通用户，2：超级用户]
+            default: 1,
+            required: true,
+        },
+
         userInfo: [UserInfoSchema],
     },
     {
