@@ -5,5 +5,6 @@ module.exports = exports = (app) => {
     app.use("/common", require("./common.js"));
     app.use("/regist", require("./regist.js"));
     app.use("/login", require("./login.js"));
+    app.use("/photo", require("./photo.js"));
     app.use("/test", require("./test.js"));
 };

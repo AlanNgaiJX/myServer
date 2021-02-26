@@ -1,5 +1,7 @@
 const expressJwt = require("express-jwt");
 const config = require("../config/index.js");
+const multer = require("multer");
+const path = require("path");
 
 // jwt验证中间件
 const jwtAuth = expressJwt({
@@ -18,7 +20,19 @@ function catchJwtAuth(err, req, res, next) {
     }
 }
 
+// multer上传中间件
+const uploader = multer({
+    dest: path.join(process.cwd(), "public/temp"),
+});
+
+// multer formdata上传中间件
+const formDataParse = multer({
+    dest: path.join(process.cwd(), "public/temp"),
+}).none();
+
 module.exports = exports = {
     jwtAuth,
     catchJwtAuth,
+    uploader,
+    formDataParse,
 };
