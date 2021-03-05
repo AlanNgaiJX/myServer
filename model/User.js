@@ -1,6 +1,6 @@
 const mongoose = require("../db/index.js");
-
-const UserInfoSchema = mongoose.Schema({
+const Schema = mongoose.Schema;
+const UserInfoSchema = Schema({
     // 用户昵称
     nickName: {
         type: String,
@@ -15,30 +15,42 @@ const UserInfoSchema = mongoose.Schema({
         default: 0,
     },
 
-    // 用户身高
-    height: {
-        type: Number,
-        min: -1,
-        max: 250,
-        default: 0,
+    // 用户介绍
+    intro: {
+        type: String,
+        maxLength: 100,
+        default: "介绍下自己",
     },
 
-    // 用户体重
-    weight: {
+    // 用户头像
+    avatar: {
         type: Number,
-        min: -1,
-        max: 250,
         default: 0,
+        min: 0,
+        max: 30,
+    },
+
+    // 背景墙
+    background: {
+        type: String,
+        default: "rgb(135,0,255)",
     },
 
     // 用户所在城市
     city: {
         type: String,
-        default: "",
+        default: "广州市",
+    },
+
+    // 状态
+    status: {
+        type: Number,
+        default: 0,
+        enum: [0, 1, 2], // [0：初始，1：更改但未完善，2：已完善]
     },
 });
 
-const UserSchema = mongoose.Schema(
+const UserSchema = Schema(
     {
         // 手机号
         phone: {
@@ -68,7 +80,15 @@ const UserSchema = mongoose.Schema(
             required: true,
         },
 
-        userInfo: [UserInfoSchema],
+        userInfo: UserInfoSchema,
+
+        participateIn: [
+            {
+                type: Schema.Types.ObjectId,
+                require: true,
+                ref: "group",
+            },
+        ],
     },
     {
         timestamps: {

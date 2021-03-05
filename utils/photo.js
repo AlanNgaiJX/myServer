@@ -10,9 +10,10 @@
 }
 */
 function parsePhoto(model) {
-    const { md5, src, exif, width, height } = model;
+    const { md5, src, exif, width, height, id } = model;
 
     return {
+        id,
         md5,
         src,
         shootTime: parseExif(exif).shootTime || "",

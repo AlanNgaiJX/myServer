@@ -1,9 +1,11 @@
 const mongoose = require("../db/index.js");
-const PhotoSchema = mongoose.Schema(
+const Schema = mongoose.Schema;
+const PhotoSchema = Schema(
     {
         userId: {
-            type: String,
+            type: Schema.Types.ObjectId,
             require: true,
+            ref: "user",
         },
 
         md5: {

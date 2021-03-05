@@ -33,7 +33,10 @@ router.post("/loginByPwd", async function (req, res) {
                     phone: user.phone,
                     userRole: user.userRole,
                 });
-                res.cookie("token", token, { maxAge: 900000 });
+                // 过期时间24小时，注意设置在cokkie上到期会自动消失的
+                res.cookie("token", token, { maxAge: 86400000 });
+                res.cookie("userId", user.id, {maxAge: 86400000});
+                console.log(user);
                 res.json({
                     code: 200,
                     msg: "登录成功",
