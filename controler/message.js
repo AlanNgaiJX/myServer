@@ -1,4 +1,4 @@
-const Message = require("../model/message.js");
+const Message = require("../model/Message.js");
 
 function createMessage(userId, content) {
     return new Message({
