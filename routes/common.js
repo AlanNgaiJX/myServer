@@ -1,6 +1,10 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
+const imagemin = require('imagemin');
+const imageminJpegtran = require('imagemin-jpegtran');
+const imageminPngquant = require('imagemin-pngquant');
+const imageminMozjpeg = require('imagemin-mozjpeg');
 const { getKeygen } = require("../controler/key.js");
 const { getInfoByUserId, updateUserInfo } = require("../controler/user.js");
 const { uploader } = require("../utils/middlewares.js");
@@ -19,21 +23,38 @@ router.post("/getPublicKey", function (req, res) {
 });
 
 /* 上传图片 */
-router.post("/uploadImg", uploader.single("file"), function (req, res) {
+router.post("/uploadImg", uploader.single("file"), async function (req, res) {
     const file = req.file;
     const extname = path.extname(file.originalname);
     const filepath = file.path;
     const targetFilepath = filepath + extname;
 
-    fs.promises
-        .rename(filepath, targetFilepath)
-        .then(() => {
-            console.log("上传成功");
-            res.end("上传成功");
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+    console.log(file);
+    fs.renameSync(filepath, filepath + extname)
+    // imagemin([filepath+extname], {
+    //     destination: path.join(process.cwd(), "public/compress"),
+    //     plugins:[
+    //         imageminMozjpeg({
+    //             quality: 30
+    //         }),
+    //         imageminPngquant({
+    //             quality: [0.2,0.4]
+    //         })
+    //     ]
+    // }).then(result=>{
+    //     console.log(result);
+    // }).catch(err=>{
+    //     console.log(err);
+    // })
+    // fs.promises
+    //     .rename(filepath, targetFilepath)
+    //     .then(() => {
+    //         console.log("上传成功");
+    //         res.end("上传成功");
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     });
 });
 
 router.post("/getInfoByUserId", jwtAuth, catchJwtAuth, function (req, res) {

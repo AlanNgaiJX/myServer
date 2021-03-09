@@ -6,3 +6,8 @@
 
 # public
 /public
+
+# logs
+/logs
+err.log
+out.log

@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --inspect app.js",
+    "forever": "forever start -l forever.log -a app.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,8 +16,14 @@
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
+    "file-stream-rotator": "^0.5.7",
+    "imagemin": "^7.0.1",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-pngquant": "^9.0.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.14",
+    "morgan": "^1.10.0",
     "multer": "^1.4.2"
   }
 }

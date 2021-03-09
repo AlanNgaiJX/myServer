@@ -10,7 +10,7 @@ function createGroup(
     groupCover
 ) {
     return new Group({
-        groupOwnerId: userId,
+        groupOwner: userId,
         groupName,
         groupIntro,
         groupType,
@@ -23,7 +23,7 @@ function createGroup(
 
 function findGroupsByOwner(userId) {
     return Group.find({
-        groupOwnerId: userId,
+        groupOwner: userId,
     })
         .populate({
             path: "groupBlogs",
